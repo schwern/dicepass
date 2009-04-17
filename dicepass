@@ -1,0 +1,15 @@
+#!/usr/bin/perl -lw
+
+my $Words       = "/usr/share/dict/words";
+my $Max_Length  = 8;
+my $Count       = 4;
+
+my @password;
+my @Words = do { open my $fh, "<", $Words; <$fh>; };
+chomp @Words;
+do {
+    my $word = lc @Words[rand @Words];
+    push @password, $word if length $word < $Max_Length;
+} while @password < $Count;
+
+print join ".", @password;
