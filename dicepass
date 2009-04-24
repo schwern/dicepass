@@ -2,14 +2,20 @@
 
 my $Words       = "/usr/share/dict/words";
 my $Max_Length  = 8;
-my $Count       = 4;
+my $Num_Words   = 4;
 
-my @password;
-my @Words = do { open my $fh, "<", $Words; <$fh>; };
-chomp @Words;
-do {
-    my $word = lc @Words[rand @Words];
-    push @password, $word if length $word < $Max_Length;
-} while @password < $Count;
+my @words;
+open my $fh, "<", $Words or die $!;
+my $count = 0;
+while(my $line = <$fh>) {
+    chomp $line;
+    $count++;
+    if( $count <= $Num_Words ) {
+        $words[$count-1] = $line;
+    }
+    elsif( rand($count) <= $Num_Words ) {
+        $words[rand($Num_Words)] = $line;
+    }
+}
 
-print join ".", @password;
+print join ".", @words;
