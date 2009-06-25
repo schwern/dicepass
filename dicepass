@@ -1,21 +1,24 @@
 #!/usr/bin/perl -lw
 
-my $Words       = "/usr/share/dict/words";
-my $Max_Length  = 8;
-my $Num_Words   = 4;
+main();
 
-my @words;
-open my $fh, "<", $Words or die $!;
-my $count = 0;
-while(my $line = <$fh>) {
-    chomp $line;
-    $count++;
-    if( $count <= $Num_Words ) {
-        $words[$count-1] = $line;
+sub main {
+    my $Words       = "/usr/share/dict/words";
+    my $Max_Length  = 8;
+    my $Num_Words   = 4;
+
+    my @words;
+    open my $fh, "<", $Words or die $!;
+    my $count = 0;
+    while (my $line = <$fh>) {
+        chomp $line;
+        $count++;
+        if ( $count <= $Num_Words ) {
+            $words[$count-1] = $line;
+        } elsif ( rand($count) <= $Num_Words ) {
+            $words[rand($Num_Words)] = $line;
+        }
     }
-    elsif( rand($count) <= $Num_Words ) {
-        $words[rand($Num_Words)] = $line;
-    }
+
+    print join ".", @words;
 }
-
-print join ".", @words;
