@@ -1,6 +1,7 @@
 #!/usr/bin/perl -lw
 
-main();
+test() if $ARGV[0] eq '--test';
+print main();
 
 sub main {
     my $Words       = "/usr/share/dict/words";
@@ -20,5 +21,23 @@ sub main {
         }
     }
 
-    print join ".", @words;
+    return join ".", @words;
 }
+
+sub test {
+    use Test::More;
+
+    my $output = main();
+    my @words = split m{\.}, $output;
+
+    is @words, 4, "output 4 words";
+
+    for my $word (@words) {
+        like $word, qr/^\w+$/, "  it is a word";
+    }
+
+    done_testing();
+    exit;
+}
+
+1;
