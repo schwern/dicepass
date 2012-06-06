@@ -1,5 +1,6 @@
 all : dicepass
 	@echo "There is no build step."
+	@echo "Now 'make test'."
 
 test :
 	@./dicepass --test
