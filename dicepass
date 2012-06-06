@@ -1,18 +1,20 @@
 #!/usr/bin/perl -lw
 
-test() if $ARGV[0] eq '--test';
+my $Max_Length = 8;
+my $Num_Words  = 3;
+
+test() if @ARGV and $ARGV[0] eq '--test';
 print main();
 
 sub main {
     my $Words       = "/usr/share/dict/words";
-    my $Max_Length  = 8;
-    my $Num_Words   = 4;
 
     my @words;
     open my $fh, "<", $Words or die $!;
     my $count = 0;
     while (my $line = <$fh>) {
         chomp $line;
+        next if length $line > $Max_Length;
         $count++;
         if ( $count <= $Num_Words ) {
             $words[$count-1] = $line;
@@ -30,7 +32,7 @@ sub test {
     my $output = main();
     my @words = split m{\.}, $output;
 
-    is @words, 4, "output 4 words";
+    is @words, $Num_Words, "output \$Num_Words words";
 
     for my $word (@words) {
         like $word, qr/^\w+$/, "  it is a word";
@@ -39,5 +41,3 @@ sub test {
     done_testing();
     exit;
 }
-
-1;
