@@ -2,13 +2,12 @@
 
 my $Max_Length = 8;
 my $Num_Words  = 3;
+my $Words      = "/usr/share/dict/words";
 
 test() if @ARGV and $ARGV[0] eq '--test';
 print main();
 
 sub main {
-    my $Words       = "/usr/share/dict/words";
-
     my @words;
     open my $fh, "<", $Words or die $!;
     my $count = 0;
