@@ -3,13 +3,18 @@
 use strict;
 use warnings;
 
+# Configuration variables
 my $Max_Length = 8;
 my $Num_Words  = 3;
 my $Words      = "/usr/share/dict/words";
 
+# Self test if --test is passed in
 test() if @ARGV and $ARGV[0] eq '--test';
+
+# Run the main program
 print main();
 
+# The main program
 sub main {
     my @words;
     open my $fh, "<", $Words or die $!;
@@ -28,6 +33,7 @@ sub main {
     return join ".", @words;
 }
 
+# Self test
 sub test {
     use Test::More;
 
