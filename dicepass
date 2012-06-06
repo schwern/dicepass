@@ -42,15 +42,18 @@ sub main {
 
 # Self test
 sub test {
-    use Test::More;
+    require Test::More;
+    Test::More->import;
 
     my $output = main();
-    my @words = split m{\.}, $output;
+    my @words = split m{\Q$Word_Separator\E}, $output;
 
-    is @words, $Num_Words, "output \$Num_Words words";
+    is( scalar @words, $Num_Words, "output $Num_Words words" );
 
     for my $word (@words) {
-        like $word, qr/^\w+$/, "  it is a word";
+        like( $word, qr/^\w+$/, "  '$word' is a word" );
+        cmp_ok( length $word, '<=', $Max_Length, "  it's not too long" );
+        cmp_ok( length $word, '>=', $Min_Length, "  and not too short" );
     }
 
     done_testing();
