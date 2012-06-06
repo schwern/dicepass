@@ -5,8 +5,8 @@ all : dicepass
 test :
 	@./dicepass --test
 
-README.html : dicepass
-	perl -MPod::Simple::HTML -e Pod::Simple::HTML::go dicepass
+README.md : dicepass
+	pod2markdown dicepass > README.md
 
 install :
 	@echo "Copy dicepass somewhere in your PATH."
