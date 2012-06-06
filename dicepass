@@ -4,7 +4,8 @@ use strict;
 use warnings;
 
 # Configuration variables
-my $Max_Length = 8;
+my $Min_Length = 4;
+my $Max_Length = 10;
 my $Num_Words  = 3;
 my $Words      = "/usr/share/dict/words";
 
@@ -21,7 +22,12 @@ sub main {
     my $count = 0;
     while (my $line = <$fh>) {
         chomp $line;
-        next if length $line > $Max_Length;
+
+        # Ignore words that are too short or too long.
+        next if length $line > $Max_Length or length $line < $Min_Length;
+
+        # Guffa's algorithm for reading random lines out of a file without
+        # storing them all in memory.
         $count++;
         if ( $count <= $Num_Words ) {
             $words[$count-1] = $line;
