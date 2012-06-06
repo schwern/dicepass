@@ -1,4 +1,4 @@
-#!/usr/bin/perl -lw
+#!/usr/bin/env perl -lw
 
 my $Max_Length = 8;
 my $Num_Words  = 3;
