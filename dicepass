@@ -1,5 +1,8 @@
 #!/usr/bin/env perl -lw
 
+use strict;
+use warnings;
+
 my $Max_Length = 8;
 my $Num_Words  = 3;
 my $Words      = "/usr/share/dict/words";
