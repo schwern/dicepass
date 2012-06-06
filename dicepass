@@ -7,6 +7,7 @@ use warnings;
 my $Min_Length = 4;
 my $Max_Length = 10;
 my $Num_Words  = 3;
+my $Word_Separator = '.';
 my $Words      = "/usr/share/dict/words";
 
 # Self test if --test is passed in
@@ -36,7 +37,7 @@ sub main {
         }
     }
 
-    return join ".", @words;
+    return join $Word_Separator, @words;
 }
 
 # Self test
