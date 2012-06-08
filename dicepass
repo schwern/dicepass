@@ -134,6 +134,7 @@ brute force.  Picking three words at random from a 200,000 word
 dictionary leads to 8,000,000,000,000,000 possibilities which is
 pretty good.
 
+See L<http://xkcd.com/936/>
 
 =head3 Why use this instead of a random string?
 
